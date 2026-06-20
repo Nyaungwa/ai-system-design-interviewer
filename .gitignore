@@ -10,4 +10,5 @@ dist-ssr/
 .env.local
 .env.*.local
 
-
+# Text files
+*.txt
