@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-900 text-white;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-orange;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brand-orange hover:bg-brand-orange-dark text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-navy-600 hover:bg-navy-500 text-white font-semibold px-6 py-3 rounded-lg border border-white/10 transition-all duration-200 active:scale-95;
+  }
+
+  .card {
+    @apply bg-navy-800 border border-white/10 rounded-xl;
+  }
+
+  .input-field {
+    @apply bg-navy-700 border border-white/10 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-orange transition-colors;
+  }
+}
+
+/* React Flow overrides */
+.react-flow__background {
+  background-color: #0d1224 !important;
+}
+
+.react-flow__controls {
+  background: #111827 !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+}
+
+.react-flow__controls-button {
+  background: #111827 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+  fill: #ffffff !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #1a2236 !important;
+}
+
+.react-flow__minimap {
+  background: #111827 !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 8px !important;
+}
+
+/* Typing dots animation */
+.typing-dot {
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+/* Circular progress */
+.circle-progress {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
