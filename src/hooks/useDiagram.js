@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 
-// Map component name keywords → node type used in DiagramCanvas
+// Map component name keywords -> node type used in DiagramCanvas
 const COMPONENT_MAP = {
   client: 'client',
   browser: 'client',
@@ -108,7 +108,7 @@ export function useDiagram() {
             source: prevNode.id,
             target: newNode.id,
             animated: true,
-            style: { stroke: '#ff9900', strokeWidth: 2 },
+            style: { stroke: '#2563eb', strokeWidth: 2 },
           },
         ])
       }

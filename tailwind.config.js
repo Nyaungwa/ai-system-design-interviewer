@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,9 +13,9 @@ export default {
           500: '#1e2a42',
         },
         brand: {
-          orange: '#ff9900',
-          'orange-dark': '#cc7a00',
-          'orange-light': '#ffb347',
+          blue: '#2563eb',
+          'blue-dark': '#1d4ed8',
+          'blue-light': '#60a5fa',
         },
       },
       animation: {

@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AI System Design Interviewer</title>
     <meta name="description" content="Practice Amazon & Google-style system design interviews with AI" />
+    <!-- Apply theme before first paint to prevent flash of wrong mode -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme')
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (t === 'dark' || (!t && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      } catch(e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

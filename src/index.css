@@ -2,94 +2,189 @@
 @tailwind components;
 @tailwind utilities;
 
+/*  Theme Tokens  */
+/* All color values live here. Light mode = :root, dark mode = html.dark. */
+/* Components read these vars so toggling the class is the only change needed. */
+
+:root {
+  /* Surfaces */
+  --bg-page:            #f1f5f9;
+  --bg-card:            #ffffff;
+  --bg-raised:          #f8fafc;
+  --bg-input:           #f8fafc;
+  --bg-header:          #ffffff;
+  --bg-bubble-ai:       #f1f5f9;
+  --bg-btn-secondary:       #f1f5f9;
+  --bg-btn-secondary-hover: #e2e8f0;
+
+  /* Borders */
+  --border-card:    rgba(0, 0, 0, 0.08);
+  --border-input:   #e2e8f0;
+  --border-header:  #e2e8f0;
+
+  /* Text */
+  --text-primary:        #0f172a;
+  --text-secondary:      #64748b;
+  --text-muted:          #94a3b8;
+  --text-placeholder:    #94a3b8;
+  --text-hint:           #94a3b8;
+  --text-bubble-ai:      #0f172a;
+  --text-btn-secondary:  #1e293b;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  /* Score bar track */
+  --bg-score-track: #e2e8f0;
+}
+
+html.dark {
+  /* Surfaces */
+  --bg-page:            #0a0e1a;
+  --bg-card:            #0d1224;
+  --bg-raised:          #111827;
+  --bg-input:           #111827;
+  --bg-header:          #0a0e1a;
+  --bg-bubble-ai:       #1a2236;
+  --bg-btn-secondary:       #1a2236;
+  --bg-btn-secondary-hover: #1e2a42;
+
+  /* Borders */
+  --border-card:    rgba(255, 255, 255, 0.1);
+  --border-input:   rgba(255, 255, 255, 0.1);
+  --border-header:  rgba(255, 255, 255, 0.1);
+
+  /* Text */
+  --text-primary:       #ffffff;
+  --text-secondary:     rgba(255, 255, 255, 0.6);
+  --text-muted:         rgba(255, 255, 255, 0.4);
+  --text-placeholder:   rgba(255, 255, 255, 0.4);
+  --text-hint:          rgba(255, 255, 255, 0.25);
+  --text-bubble-ai:     #ffffff;
+  --text-btn-secondary: #ffffff;
+
+  /* Shadows */
+  --shadow-card: none;
+
+  /* Score bar track */
+  --bg-score-track: #1a2236;
+}
+
+/*  Smooth transition when toggling theme  */
+/* Applied only for the 300 ms window of a toggle, then removed.  */
+html.transitioning *,
+html.transitioning *::before,
+html.transitioning *::after {
+  transition:
+    color            0.3s ease,
+    background-color 0.3s ease,
+    border-color     0.3s ease,
+    box-shadow       0.3s ease !important;
+  transition-delay: 0s !important;
+}
+
+/*  Base   */
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-navy-900 text-white;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
+    background-attachment: fixed;
+    min-height: 100vh;
   }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  /* Light mode page gradient */
+  body {
+    background-image:
+      radial-gradient(ellipse 90% 65% at 50% 28%, rgba(37, 99, 235, 0.06) 0%, transparent 68%);
   }
 
-  ::-webkit-scrollbar-track {
-    @apply bg-navy-800;
+  /* Dark mode page gradient */
+  html.dark body {
+    background-image:
+      radial-gradient(ellipse 100% 100% at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.6) 100%),
+      radial-gradient(ellipse 75% 55% at 58% 30%, rgba(109, 40, 217, 0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 90% 65% at 50% 28%, rgba(37, 99, 235, 0.14) 0%, transparent 68%);
   }
 
-  ::-webkit-scrollbar-thumb {
-    @apply bg-navy-600 rounded-full;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-brand-orange;
-  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track    { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb    { background: #cbd5e1; border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+  html.dark ::-webkit-scrollbar-track { background: #0d1224; }
+  html.dark ::-webkit-scrollbar-thumb { background: #1a2236; border-radius: 9999px; }
 }
 
+/*  Components   */
 @layer components {
+  /* Primary CTA — brand blue, always same */
   .btn-primary {
-    @apply bg-brand-orange hover:bg-brand-orange-dark text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 active:scale-95;
+    @apply bg-brand-blue hover:bg-brand-blue-dark text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200 active:scale-95;
   }
 
+  /* Secondary button — reads theme vars, no dark: needed */
   .btn-secondary {
-    @apply bg-navy-600 hover:bg-navy-500 text-white font-semibold px-6 py-3 rounded-lg border border-white/10 transition-all duration-200 active:scale-95;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-btn-secondary);
+    color: var(--text-btn-secondary);
+    border: 1px solid var(--border-card);
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
   }
+  .btn-secondary:hover  { background-color: var(--bg-btn-secondary-hover); }
+  .btn-secondary:active { transform: scale(0.95); }
 
+  /* Card surface — reads theme vars, so light/dark just works */
   .card {
-    @apply bg-navy-800 border border-white/10 rounded-xl;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-card);
   }
 
+  /* Text input / textarea */
   .input-field {
-    @apply bg-navy-700 border border-white/10 text-white placeholder-white/40 rounded-lg px-4 py-3 focus:outline-none focus:border-brand-orange transition-colors;
+    display: block;
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-primary);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    outline: none;
+    font-size: inherit;
   }
+  .input-field:focus         { border-color: #2563eb; }
+  .input-field::placeholder  { color: var(--text-placeholder); }
+  .input-field:disabled      { opacity: 0.4; cursor: not-allowed; }
 }
 
-/* React Flow overrides */
-.react-flow__background {
-  background-color: #0d1224 !important;
-}
+/* React Flow (diagram canvas stays dark regardless of theme) */
+.react-flow__background         { background-color: #0d1224 !important; }
+.react-flow__controls           { background: #111827 !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 8px !important; }
+.react-flow__controls-button    { background: #111827 !important; border-bottom: 1px solid rgba(255,255,255,0.1) !important; fill: #ffffff !important; }
+.react-flow__controls-button:hover { background: #1a2236 !important; }
+.react-flow__minimap            { background: #111827 !important; border: 1px solid rgba(255,255,255,0.1) !important; border-radius: 8px !important; }
 
-.react-flow__controls {
-  background: #111827 !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
-  border-radius: 8px !important;
-}
-
-.react-flow__controls-button {
-  background: #111827 !important;
-  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-  fill: #ffffff !important;
-}
-
-.react-flow__controls-button:hover {
-  background: #1a2236 !important;
-}
-
-.react-flow__minimap {
-  background: #111827 !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
-  border-radius: 8px !important;
-}
-
-/* Typing dots animation */
-.typing-dot {
-  animation: typingBounce 1.2s infinite ease-in-out;
-}
-
-.typing-dot:nth-child(1) { animation-delay: 0s; }
+/* Typing indicator dots  */
+.typing-dot { animation: typingBounce 1.2s infinite ease-in-out; }
+.typing-dot:nth-child(1) { animation-delay: 0s;   }
 .typing-dot:nth-child(2) { animation-delay: 0.2s; }
 .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
 @keyframes typingBounce {
   0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
+  30%           { transform: translateY(-6px); }
 }
 
-/* Circular progress */
+/*  Score ring  */
 .circle-progress {
   transform: rotate(-90deg);
   transform-origin: 50% 50%;

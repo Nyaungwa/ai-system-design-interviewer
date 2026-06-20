@@ -18,8 +18,8 @@ export default function Timer({ running }) {
   const ss = String(seconds % 60).padStart(2, '0')
 
   return (
-    <div className="flex items-center gap-2 text-white/60 text-sm font-mono">
-      <FiClock className="text-brand-orange" />
+    <div className="flex items-center gap-2 text-sm font-mono" style={{ color: 'var(--text-secondary)' }}>
+      <FiClock className="text-brand-blue" />
       <span>{mm}:{ss}</span>
     </div>
   )

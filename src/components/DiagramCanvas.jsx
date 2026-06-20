@@ -23,7 +23,7 @@ const NODE_CONFIG = {
   queue:         { icon: SiApachekafka, color: '#818cf8', label: 'Message Queue'  },
   cdn:           { icon: FiZap,         color: '#2dd4bf', label: 'CDN'            },
   storage:       { icon: FiHardDrive,   color: '#94a3b8', label: 'Storage'        },
-  microservice:  { icon: FiBox,         color: '#ff9900', label: 'Microservice'   },
+  microservice:  { icon: FiBox,         color: '#2563eb', label: 'Microservice'   },
   auth:          { icon: FiShield,      color: '#4ade80', label: 'Auth Service'   },
 }
 
@@ -76,7 +76,7 @@ export default function DiagramCanvas({ nodes, edges, onNodesChange }) {
           <MiniMap
             nodeColor={(n) => {
               const cfg = NODE_CONFIG[n.data?.componentType]
-              return cfg ? cfg.color : '#ff9900'
+              return cfg ? cfg.color : '#2563eb'
             }}
             maskColor="rgba(10,14,26,0.7)"
           />

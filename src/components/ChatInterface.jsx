@@ -5,14 +5,14 @@ import { FaAmazon } from 'react-icons/fa'
 function TypingIndicator() {
   return (
     <div className="flex items-end gap-3 animate-fade-in">
-      <div className="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center flex-shrink-0">
+      <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center flex-shrink-0">
         <FaAmazon className="text-black text-sm" />
       </div>
-      <div className="bg-navy-600 rounded-2xl rounded-bl-none px-4 py-3">
+      <div className="rounded-2xl rounded-bl-none px-4 py-3" style={{ backgroundColor: 'var(--bg-bubble-ai)' }}>
         <div className="flex gap-1.5 items-center h-4">
-          <span className="typing-dot w-2 h-2 bg-white/60 rounded-full block" />
-          <span className="typing-dot w-2 h-2 bg-white/60 rounded-full block" />
-          <span className="typing-dot w-2 h-2 bg-white/60 rounded-full block" />
+          <span className="typing-dot w-2 h-2 rounded-full block" style={{ backgroundColor: 'var(--text-muted)' }} />
+          <span className="typing-dot w-2 h-2 rounded-full block" style={{ backgroundColor: 'var(--text-muted)' }} />
+          <span className="typing-dot w-2 h-2 rounded-full block" style={{ backgroundColor: 'var(--text-muted)' }} />
         </div>
       </div>
     </div>
@@ -24,16 +24,13 @@ function Message({ msg }) {
   return (
     <div className={`flex items-end gap-3 animate-fade-in ${isAI ? '' : 'flex-row-reverse'}`}>
       {isAI && (
-        <div className="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center flex-shrink-0">
           <FaAmazon className="text-black text-sm" />
         </div>
       )}
       <div
-        className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap
-          ${isAI
-            ? 'bg-navy-600 text-white rounded-bl-none'
-            : 'bg-brand-orange text-black font-medium rounded-br-none'
-          }`}
+        className={`max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${isAI ? 'rounded-bl-none' : 'bg-brand-blue text-black font-medium rounded-br-none'}`}
+        style={isAI ? { backgroundColor: 'var(--bg-bubble-ai)', color: 'var(--text-bubble-ai)' } : undefined}
       >
         {msg.content}
       </div>
@@ -68,7 +65,7 @@ export default function ChatInterface({ messages, isTyping, onSend, disabled, in
       </div>
 
       {/* Input bar */}
-      <div className="border-t border-white/10 p-4">
+      <div className="p-4" style={{ borderTop: '1px solid var(--border-header)' }}>
         <div className="flex gap-3 items-end">
           <textarea
             ref={inputRef}
@@ -88,7 +85,9 @@ export default function ChatInterface({ messages, isTyping, onSend, disabled, in
             <FiSend className="text-lg" />
           </button>
         </div>
-        <p className="text-white/25 text-xs mt-2">Press Enter to send · Shift+Enter for new line</p>
+        <p className="text-xs mt-2" style={{ color: 'var(--text-hint)' }}>
+          Press Enter to send · Shift+Enter for new line
+        </p>
       </div>
     </div>
   )

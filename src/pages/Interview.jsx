@@ -5,6 +5,7 @@ import { FaAmazon } from 'react-icons/fa'
 import ChatInterface from '../components/ChatInterface'
 import DiagramCanvas from '../components/DiagramCanvas'
 import Timer from '../components/Timer'
+import ThemeToggle from '../components/ThemeToggle'
 import { useInterview } from '../hooks/useInterview'
 import { useDiagram } from '../hooks/useDiagram'
 
@@ -22,25 +23,20 @@ export default function Interview() {
   const { messages, isTyping, isComplete, scores, startInterview, sendMessage } =
     useInterview(system, addComponent)
 
-  // Start interview automatically when page loads
   useEffect(() => {
     if (!system) { navigate('/'); return }
     startInterview().then(() => setStarted(true))
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Track elapsed seconds for saving to DynamoDB
   useEffect(() => {
     if (!started) return
     const id = setInterval(() => setElapsed(e => e + 1), 1000)
     return () => clearInterval(id)
   }, [started])
 
-  // Auto-navigate to results when interview finishes
   useEffect(() => {
     if (isComplete && scores) {
-      navigate('/results', {
-        state: { scores, system, duration: elapsed },
-      })
+      navigate('/results', { state: { scores, system, duration: elapsed } })
     }
   }, [isComplete, scores]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -58,24 +54,34 @@ export default function Interview() {
   if (!system) return null
 
   return (
-    <div className="flex flex-col h-screen bg-navy-900 overflow-hidden">
+    <div className="flex flex-col h-screen overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
       {/* Top bar */}
-      <header className="flex items-center justify-between px-5 py-3 border-b border-white/10 flex-shrink-0">
+      <header
+        className="flex items-center justify-between px-5 py-3 flex-shrink-0"
+        style={{ backgroundColor: 'var(--bg-header)', borderBottom: '1px solid var(--border-header)' }}
+      >
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center">
+          <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center">
             <FaAmazon className="text-black text-sm" />
           </div>
           <div>
-            <p className="text-white text-sm font-semibold leading-none">AI Interviewer</p>
-            <p className="text-white/40 text-xs">{system}</p>
+            <p className="text-sm font-semibold leading-none" style={{ color: 'var(--text-primary)' }}>AI Interviewer</p>
+            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{system}</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Timer running={started && !isComplete} />
+          <ThemeToggle />
           <button
             onClick={handleEnd}
-            className="flex items-center gap-2 text-sm text-white/60 hover:text-white border border-white/10 hover:border-white/30 px-3 py-1.5 rounded-lg transition-all"
+            className="flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg transition-all"
+            style={{
+              color: 'var(--text-secondary)',
+              border: '1px solid var(--border-card)',
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--text-primary)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-secondary)'}
           >
             <FiX /> End Interview
           </button>
@@ -85,7 +91,10 @@ export default function Interview() {
       {/* Split layout */}
       <div className="flex flex-1 min-h-0">
         {/* Left — chat */}
-        <div className="w-[45%] flex flex-col border-r border-white/10 min-h-0">
+        <div
+          className="w-[45%] flex flex-col min-h-0"
+          style={{ borderRight: '1px solid var(--border-header)', backgroundColor: 'var(--bg-card)' }}
+        >
           <ChatInterface
             messages={messages}
             isTyping={isTyping}
@@ -96,14 +105,10 @@ export default function Interview() {
           />
         </div>
 
-        {/* Right — diagram */}
+        {/* Right — diagram (intentionally stays dark) */}
         <div className="flex-1 p-4 min-h-0">
           <div className="h-full">
-            <DiagramCanvas
-              nodes={nodes}
-              edges={edges}
-              onNodesChange={onNodesChange}
-            />
+            <DiagramCanvas nodes={nodes} edges={edges} onNodesChange={onNodesChange} />
           </div>
         </div>
       </div>

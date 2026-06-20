@@ -1,11 +1,12 @@
 # AI System Design Interviewer
 
+![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?logo=javascript&logoColor=black)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-3-38BDF8?logo=tailwindcss&logoColor=white)
 ![Claude](https://img.shields.io/badge/Claude-Sonnet--4-D97706?logo=anthropic&logoColor=white)
 ![DynamoDB](https://img.shields.io/badge/AWS-DynamoDB-FF9900?logo=amazondynamodb&logoColor=white)
-![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?logo=vercel&logoColor=white)
+
 
 > Practice Amazon & Google-style system design interviews with an AI that asks real follow-up questions, builds a live architecture diagram, and scores your performance.
 
