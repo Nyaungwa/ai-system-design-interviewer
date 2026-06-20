@@ -1,5 +1,8 @@
 # AI System Design Interviewer
+<<<<<<< HEAD
 
+=======
+>>>>>>> c57acb4ce5880ac795d3b96b0cb5ffe513a4a697
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?logo=javascript&logoColor=black)
 ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
@@ -10,7 +13,7 @@
 
 > Practice Amazon & Google-style system design interviews with an AI that asks real follow-up questions, builds a live architecture diagram, and scores your performance.
 
-**Live Demo:**
+**Live Demo:** https://ai-system-design-interviewer-self.vercel.app
 
 ---
 
@@ -101,11 +104,11 @@ Table schema:
 ```
 Browser
   └── React SPA (Vite)
-        ├── Landing Page  ──────────────────── DynamoDB (recent sessions)
+        ├── Landing Page  --> DynamoDB (recent sessions)
         ├── Interview Page
-        │     ├── ChatInterface (streaming)── Claude API (Sonnet)
-        │     └── DiagramCanvas ──────────── React Flow
-        └── Results Page  ──────────────────── DynamoDB (save session)
+        │     ├── ChatInterface (streaming)--> Claude API (Sonnet)
+        │     └── DiagramCanvas --> React Flow
+        └── Results Page  --> DynamoDB (save session)
 ```
 
 The AI streams responses token-by-token. The frontend scans each chunk for `COMPONENT:` lines to add diagram nodes in real time and for `INTERVIEW_COMPLETE` followed by a JSON block to trigger the results page.
