@@ -9,7 +9,7 @@
 
 > Practice Amazon & Google-style system design interviews with an AI that asks real follow-up questions, builds a live architecture diagram, and scores your performance.
 
-**Live Demo:**
+**Live Demo:** https://ai-system-design-interviewer-self.vercel.app
 
 ---
 
