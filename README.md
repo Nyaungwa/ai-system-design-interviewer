@@ -100,11 +100,11 @@ Table schema:
 ```
 Browser
   └── React SPA (Vite)
-        ├── Landing Page  ──────────────────── DynamoDB (recent sessions)
+        ├── Landing Page  --> DynamoDB (recent sessions)
         ├── Interview Page
-        │     ├── ChatInterface (streaming)── Claude API (Sonnet)
-        │     └── DiagramCanvas ──────────── React Flow
-        └── Results Page  ──────────────────── DynamoDB (save session)
+        │     ├── ChatInterface (streaming)--> Claude API (Sonnet)
+        │     └── DiagramCanvas --> React Flow
+        └── Results Page  --> DynamoDB (save session)
 ```
 
 The AI streams responses token-by-token. The frontend scans each chunk for `COMPONENT:` lines to add diagram nodes in real time and for `INTERVIEW_COMPLETE` followed by a JSON block to trigger the results page.
